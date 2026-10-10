@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-go@v7
-        with: { go-version: '1.27.1' }
+        with: { go-version: '1.27.2' }
       - run: go vet ./...
       - run: go test -race -v ./...
       # On Linux only: the kernel copy, and what follows it in Range, runs
@@ -44,7 +44,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-go@v7
-        with: { go-version: '1.27.1' }
+        with: { go-version: '1.27.2' }
       - run: docker run --privileged --rm tonistiigi/binfmt --install all
       - run: CGO_ENABLED=0 GOOS=linux GOARCH=${{ matrix.arch }} go test -c -o /tmp/t.test .
       - run: docker run --rm --platform linux/${{ matrix.arch }} -e QEMU_CPU=${{ matrix.qemu }} -v /tmp:/t ${{ matrix.image }} /t/t.test -test.v -test.short -test.timeout 20m
@@ -57,7 +57,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-go@v7
-        with: { go-version: '1.27.1' }
+        with: { go-version: '1.27.2' }
       - run: |
           export GOOS=${TARGET%/*} GOARCH=${TARGET#*/}
           go vet ./...
